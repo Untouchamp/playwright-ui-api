@@ -1,0 +1,16 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="UITests" configfailurepolicy="continue" skipfailedinvocationcounts="false">
+
+    <test name="uitests">
+        <!--        <groups>-->
+        <!--           <run>-->
+        <!--               <include name="medium"/>-->
+        <!--               <include name="high"/>-->
+        <!--           </run> -->
+        <!--        </groups>-->
+        <classes>
+            <class name="com.example.ui.general.NavigationTest"/>
+        </classes>
+    </test>
+
+</suite>

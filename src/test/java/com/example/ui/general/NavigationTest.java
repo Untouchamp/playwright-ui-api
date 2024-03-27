@@ -1,6 +1,10 @@
 package com.example.ui.general;
 
 import com.microsoft.playwright.*;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import pages.LandingPage;
@@ -8,6 +12,36 @@ import pages.LandingPage;
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
 public class NavigationTest {
+    // Shared between all tests in this class.
+    static Playwright playwright;
+    static Browser browser;
+
+    // New instance for each test method.
+    BrowserContext context;
+    Page page;
+
+    @BeforeAll
+    static void launchBrowser() {
+        playwright = Playwright.create();
+        browser = playwright.chromium().launch();
+    }
+
+    @AfterAll
+    static void closeBrowser() {
+        playwright.close();
+    }
+
+    @BeforeEach
+    void createContextAndPage() {
+        context = browser.newContext();
+        page = context.newPage();
+    }
+
+    @AfterEach
+    void closeContext() {
+        context.close();
+        page.close();
+    }
 
     @ParameterizedTest
     @CsvSource({
@@ -16,17 +50,15 @@ public class NavigationTest {
             "Community, Welcome | Playwright Java"
     })
     void navigationTest(String sectionName, String expectedPageTitle) {
-        try (Playwright playwright = Playwright.create()) {
-            Browser browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
-            BrowserContext context = browser.newContext();
-            Page page = context.newPage();
+        Browser browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
+        BrowserContext context = browser.newContext();
+        Page page = context.newPage();
 
-            LandingPage landingPage = new LandingPage(page);
-            landingPage
-                    .open()
-                    .goToSectionNamed(page, sectionName);
-            assertThat(page).hasTitle(expectedPageTitle);
-            browser.close();
-        }
+        LandingPage landingPage = new LandingPage(page);
+        landingPage
+                .open()
+                .goToSectionNamed(page, sectionName);
+        assertThat(page).hasTitle(expectedPageTitle);
+        browser.close();
     }
 }
