@@ -1,16 +1,14 @@
 package com.example.ui.general;
 
 import com.microsoft.playwright.*;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import pages.LandingPage;
 
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class NavigationTest {
     // Shared between all tests in this class.
     static Playwright playwright;

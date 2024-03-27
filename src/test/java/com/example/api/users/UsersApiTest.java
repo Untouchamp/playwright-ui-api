@@ -72,7 +72,7 @@ public class UsersApiTest extends APITestSetup {
         APIResponse userByUsername = request.get(apiGetUserFilter,
                 RequestOptions.create().setQueryParam("username", "5ad47038e3"));
         User user = new Gson().fromJson(userByUsername.text(), User.class);
-        assertEquals("", user.getEmail());
+        assertEquals("fd42a3a1@mail.xcr", user.getEmail());
     }
 
     @Test
