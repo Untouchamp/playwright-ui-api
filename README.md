@@ -20,9 +20,9 @@ To set up the project, follow these steps:
 ## Running Tests
 To run the tests, execute the following commands:
 - For API tests:
- `mvn test -Dtest=com.example.api.*`
+ `mvn clean test -Ptest=APITests -DthreadCount=%test_thread_count%`
 - For UI tests:
- `mvn test -Dtest=com.example.ui.*`
+ `mvn clean test -Ptest=UITests -DthreadCount=%test_thread_count%`
 
 ## Project Structure
 The project structure is organized as follows:
