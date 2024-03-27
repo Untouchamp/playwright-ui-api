@@ -20,9 +20,9 @@ To set up the project, follow these steps:
 ## Running Tests
 To run the tests, execute the following commands:
 - For API tests:
- `mvn test -Dtest=APITestSuite`
+ `mvn test -Dtest=com.example.api.*`
 - For UI tests:
- `mvn test -Dtest=UITestSuite`
+ `mvn test -Dtest=com.example.ui.*`
 
 ## Project Structure
 The project structure is organized as follows:
